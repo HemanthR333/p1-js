@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+<h1>Angular Application To Display Students Details in Uppercase</h1>
+<script src="angular.min.js"></script>
+</head>
+<script>
+ var app=angular.module("myapp",[]);
+ app.controller("mycontroller",function($scope)
+{
+ $scope.students=[{name:'joe',branch:'aiml',sub1:'ajs',sub2:'rm'}];
+
+ $scope.additem=function()
+ {
+ $scope.students.push({name:$scope.name,branch:$scope.branch,sub1:$scope.sub1,sub2:$scope.sub2});
+ }
+});
+</script>
+<body ng-controller="mycontroller">
+Enter Name:
+<input type="text" ng-model="name"><br><br>
+Enter Branch:
+<input type="text" ng-model="branch"><br><br>
+Enter Subject1:
+<input type="text" ng-model="sub1"><br><br>
+Enter Subject2:
+<input type="text" ng-model="sub2"><br><br>
+<button ng-click="additem()">additem</button>
+<h1 style="color: aqua;">Displaying original Students Details</h1>
+<!-- displaying Normal Students Details -->
+<table border="1">
+<tr>
+ <td>NAME</td>
+ <td>BRANCH</td>
+ <td>SUBJECT1</td>
+ <td>SUBJECT2</td>
+</tr>
+<tr ng-repeat="n in students track by $index">
+ <td >{{n.name}}</td>
+ <td>{{n.branch}}</td>
+ <td>{{n.sub1}}</td>
+ <td>{{n.sub2}}</td>
+</tr>
+</table>
+<h1 style="color: coral;">Displaying Uppercased Students Detail</h1>
+<!-- displaying captalized students details using Filters -->
+<table border="1">
+<tr>
+ <td>NAME</td>
+ <td>BRANCH</td>
+ <td>SUBJECT1</td>
+ <td>SUBJECT2</td>
+ </tr>
+<tr ng-repeat="n in students track by $index">
+ <td >{{n.name | uppercase}}</td>
+ <td>{{n.branch | uppercase}}</td>
+ <td>{{n.sub1 | uppercase}}</td>
+ <td>{{n.sub2 | uppercase}}</td>
+</tr>
+</table>
+</body>
+</html>

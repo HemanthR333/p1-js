@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="ticketBookingApp">
+
+<head>
+  <title>Ticket Booking Application</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body ng-controller="bookingController">
+  <h2>Book Tickets</h2>
+  <form ng-submit="bookTicket()">
+    <label>Name:</label>
+    <input type="text" ng-model="newBooking.name" required>
+    <label>Number of Tickets:</label>
+    <input type="number" ng-model="newBooking.numTickets" min="1" required>
+    <label>Movie:</label>
+    <input type="text" ng-model="newBooking.movie" required>
+    <button type="submit">Book Tickets</button>
+  </form>
+
+  <h3>Bookings:</h3>
+  <ul>
+    <li ng-repeat="booking in bookings">
+      <strong>{{ booking.name }}</strong> - Tickets: {{ booking.numTickets }} - Movie: {{booking.movie}}
+    </li>
+  </ul>
+</body>
+
+</html>

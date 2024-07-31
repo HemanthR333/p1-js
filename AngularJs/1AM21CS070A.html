@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+    <h1 style="color: blue;">Angular Application To Perform CRUD Operations</h1>
+    <script src="angular.min.js"></script>
+</head>
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("mycontroller", function ($scope) {
+        $scope.array = [{ name: 'joe', age: 25, cgpa: 9 }];
+
+        $scope.adduser = function () {
+            $scope.array.push({ name: $scope.name, age: $scope.age, cgpa: $scope.cgpa });
+        }
+
+        $scope.deleteuser = function ($index) {
+            $scope.array.splice($index, 1);
+        }
+
+        $scope.edituser = function ($index) {
+            $scope.newname = prompt('enter name to update');
+            $scope.newage = prompt('enter age to update');
+            $scope.newcgpa = prompt('enter cgpa to update');
+            if (!($scope.newname == null && $scope.newage == null && $scope.newcgpa == null)) {
+                $scope.updateduser = { name: $scope.newname, age: $scope.newage, cgpa: $scope.newcgpa };
+                $scope.array.splice($index, 1, $scope.updateduser);
+            }
+            else {
+                alert('Not Updated');
+            }
+
+        }
+    });
+</script>
+
+<body ng-controller="mycontroller">
+    Enter Name:
+    <input type="text" ng-model="name"><br><br>
+    Enter Age:
+    <input type="number" ng-model="age"><br><br>
+    Enter CGPA:
+    <input type="number" ng-model="cgpa" min="1" max="10"><br><br>
+    <button ng-click="adduser()">additem</button>
+    <h1>Total element:{{array.length}}</h1>
+    <table border="1">
+        <h1> Displaying students details</h1>
+        <tr>
+                <td>NAME</td>
+                <td>AGE</td>
+                <td>CGPA</td>
+                <td>Actions</td>
+        </tr>
+        <tr ng-repeat="n in array track by $index">
+                <td>{{n.name}}</td>
+                <td>{{n.age}}</td>
+                <td>{{n.cgpa}}</td>
+                <td>
+                    <button ng-click="deleteuser($index)">delete</button>
+                    <button ng-click="edituser($index)">edit</button>
+                    </td>
+        </tr>
+    </table>
+</body>
+
+</html>
